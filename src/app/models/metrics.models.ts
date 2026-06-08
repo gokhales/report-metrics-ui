@@ -9,22 +9,16 @@ export interface DualCount {
   total: number;
 }
 
-export interface AmendedMgl {
-  labNumber: string;
+// Amended/Corrected: grouped by reason + type only
+export interface AmendedReason {
   reason: string;
   reportUnlockType: string;
   count: number;
 }
 
-export interface AmendedLims {
-  labNumber: string;
-  reportUnlockType: string;
-  reason: string;
-}
-
 export interface AmendedCorrected {
-  mgl: AmendedMgl[];
-  lims: AmendedLims[];
+  mgl: AmendedReason[];
+  lims: AmendedReason[];
 }
 
 export interface DelayedReport {

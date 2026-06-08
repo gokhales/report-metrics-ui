@@ -282,7 +282,66 @@ table {
   padding: 0.2rem 0.6rem;
   border-radius: 9999px;
 
-  &.red-badge { background: #2d1212; color: #fca5a5; }
+  &.red-badge    { background: #2d1212; color: #fca5a5; }
+  &.violet-badge { background: #1e1535; color: #c4b5fd; }
+}
+
+/* ── Amended / Corrected charts ──────────────────────────────────────── */
+.amended-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  @media (max-width: 900px) { grid-template-columns: 1fr; }
+}
+
+.amended-panel {
+  background: var(--bg-raised);
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--border);
+}
+
+.amended-panel-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+
+  h3 {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .db-tag {
+    font-size: 0.7rem;
+    font-weight: 400;
+    color: var(--text-muted);
+    text-transform: none;
+    margin-left: 0.4rem;
+  }
+}
+
+.type-pills {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.type-pill {
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.15rem 0.5rem;
+  border-radius: 9999px;
+  white-space: nowrap;
+}
+
+.amended-chart-wrap {
+  canvas { max-height: 320px; }
 }
 
 .delayed-layout {

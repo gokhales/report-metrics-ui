@@ -153,50 +153,51 @@
       <p class="empty">✅ No delayed reports in this date range.</p>
     </section>
 
-    <!-- ── Amended / Corrected Table ─────────────────────────────────── -->
+    <!-- ── Amended / Corrected — stacked bar charts ─────────────────── -->
     <section class="section-card" *ngIf="amended">
-      <h2>Amended / Corrected by Reason</h2>
-      <div class="tabs">
-        <div class="tab-section">
-          <h3>MGL (non-PGx / non-BIO)</h3>
-          <div class="table-wrap" *ngIf="amended.mgl.length; else emptyMgl">
-            <table>
-              <thead>
-                <tr>
-                  <th>Lab Number</th><th>Unlock Type</th><th>Reason</th><th class="num">Count</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let row of amended.mgl">
-                  <td>{{ row.labNumber }}</td>
-                  <td><span class="badge" [class]="'badge-' + row.reportUnlockType.toLowerCase()">{{ row.reportUnlockType }}</span></td>
-                  <td>{{ row.reason }}</td>
-                  <td class="num">{{ row.count }}</td>
-                </tr>
-              </tbody>
-            </table>
+      <div class="section-header">
+        <h2>Amended / Corrected by Reason &amp; Type</h2>
+        <span class="section-badge violet-badge">{{ totalAmended }} total amendments</span>
+      </div>
+
+      <div class="amended-grid">
+
+        <!-- MGL -->
+        <div class="amended-panel">
+          <div class="amended-panel-header">
+            <h3>MGL <span class="db-tag">non-PGx / non-BIO</span></h3>
+            <div class="type-pills">
+              <span *ngFor="let s of mglAmendedSummary" class="type-pill"
+                    [style.background]="s.color + '22'" [style.color]="s.color"
+                    [style.border]="'1px solid ' + s.color + '55'">
+                {{ s.type }} · {{ s.count }}
+              </span>
+            </div>
           </div>
-          <ng-template #emptyMgl><p class="empty">No MGL amendments in range.</p></ng-template>
+          <div class="amended-chart-wrap" *ngIf="amended.mgl.length; else emptyMgl">
+            <canvas baseChart [data]="mglAmendedChartData" [options]="amendedChartOptions" type="bar"></canvas>
+          </div>
+          <ng-template #emptyMgl><p class="empty">No MGL amendments in this range.</p></ng-template>
         </div>
 
-        <div class="tab-section">
-          <h3>LIMS (PGx / BIO)</h3>
-          <div class="table-wrap" *ngIf="amended.lims.length; else emptyLims">
-            <table>
-              <thead>
-                <tr><th>Lab Number</th><th>Unlock Type</th><th>Reason</th></tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let row of amended.lims">
-                  <td>{{ row.labNumber }}</td>
-                  <td><span class="badge" [class]="'badge-' + row.reportUnlockType.toLowerCase()">{{ row.reportUnlockType }}</span></td>
-                  <td>{{ row.reason }}</td>
-                </tr>
-              </tbody>
-            </table>
+        <!-- LIMS -->
+        <div class="amended-panel">
+          <div class="amended-panel-header">
+            <h3>LIMS <span class="db-tag">PGx / BIO</span></h3>
+            <div class="type-pills">
+              <span *ngFor="let s of limsAmendedSummary" class="type-pill"
+                    [style.background]="s.color + '22'" [style.color]="s.color"
+                    [style.border]="'1px solid ' + s.color + '55'">
+                {{ s.type }} · {{ s.count }}
+              </span>
+            </div>
           </div>
-          <ng-template #emptyLims><p class="empty">No LIMS amendments in range.</p></ng-template>
+          <div class="amended-chart-wrap" *ngIf="amended.lims.length; else emptyLims">
+            <canvas baseChart [data]="limsAmendedChartData" [options]="amendedChartOptions" type="bar"></canvas>
+          </div>
+          <ng-template #emptyLims><p class="empty">No LIMS amendments in this range.</p></ng-template>
         </div>
+
       </div>
     </section>
 
